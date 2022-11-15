@@ -22,18 +22,21 @@ class QuestionSeeder extends Seeder
         $params = [
             [
                 'big_question_id' => 1,
+                'title'=>'高輪',
                 'image' => 'takanawa.png',
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
                 'big_question_id' => 1,
+                'title'=>'亀戸',
                 'image' => 'kameido.png',
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
                 'big_question_id' => 2,
+                'title'=>'向洋',
                 'image' => 'mukainada.png',
                 'created_at' => $now,
                 'updated_at' => $now,
