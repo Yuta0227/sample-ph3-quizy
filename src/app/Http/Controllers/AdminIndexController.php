@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Question;
 use App\BigQuestion;
 use App\Choice;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -22,9 +23,17 @@ class AdminController extends Controller
         return view('admin.quiz.edit', compact('question'));
     }
 
-    public function edit(Request $request, $id)
-    {
-        $choices = Question::find($id)->choices;
+    public function edit(Request $request, $id) {
+        $choices = Question::findorfail($id)->choices;
+        if($choices===false){
+            abort(404);
+        }
+        $validatedData = $request->validate([
+            'name0' => 'required|max:20',
+            'name1' => 'required|max:20',
+            'name2' => 'required|max:20',
+            'valid' => 'required|integer|between:0,2',
+        ]);
         foreach ($choices as $index => $choice) {
             $choice->name = $request->{'name' . $index};
             if ($index === intval($request->valid)) {
